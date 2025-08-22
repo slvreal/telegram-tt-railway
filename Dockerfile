@@ -19,4 +19,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+
+ENV TELEGRAM_API_ID=20045757
+ENV TELEGRAM_API_HASH=7d3ea0c0d4725498789bd51a9ee02421
+
 CMD ["npm", "run", "dev"]
