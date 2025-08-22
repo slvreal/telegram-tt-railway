@@ -21,4 +21,4 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-CMD ["npm", "run", "electron:dev"]
+CMD ["npm", "run", "dev"]
