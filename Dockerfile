@@ -4,6 +4,8 @@ FROM node:20-bullseye
 # Git is needed to clone (and the app calls git at runtime for metadata).
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
+ENV NODE_OPTIONS=""
+
 WORKDIR /app
 RUN git clone --depth=1 https://github.com/Ajaxy/telegram-tt.git .
 
