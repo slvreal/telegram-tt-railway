@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 ENV NODE_OPTIONS=""
 
 WORKDIR /app
-RUN git clone --depth=1 https://github.com/Ajaxy/telegram-tt.git .
+RUN git clone https://github.com/slvreal/telegram-tt-railway.git .
 
 # Install deps from lockfile
 RUN npm ci
