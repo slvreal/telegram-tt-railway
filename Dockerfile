@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:24
 
 # Install Electron runtime dependencies
 RUN apt-get update && apt-get install -y \
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
+RUN git init
 COPY . .
 
 ENV TELEGRAM_API_ID=20045757
