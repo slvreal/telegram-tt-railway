@@ -5,6 +5,8 @@ FROM node:24
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 ENV NODE_OPTIONS=""
+ENV TELEGRAM_API_ID=20045757
+ENV TELEGRAM_API_HASH=7d3ea0c0d4725498789bd51a9ee02421
 
 WORKDIR /app
 RUN git clone https://github.com/slvreal/telegram-tt-railway.git .
