@@ -1,27 +1,18 @@
-FROM node:24
+# Use a Node LTS. Match the repo’s .node-version if you can.
+FROM node:20-bullseye
 
-# Install Electron runtime dependencies
-RUN apt-get update && apt-get install -y \
-    libglib2.0-0 \
-    libx11-xcb1 \
-    libnss3 \
-    libasound2 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libxcomposite1 \
-    libxrandr2 \
-    libgbm1 \
-    libgtk-3-0 \
-    && rm -rf /var/lib/apt/lists/*
+# Git is needed to clone (and the app calls git at runtime for metadata).
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY package*.json ./
+RUN git clone --depth=1 https://github.com/Ajaxy/telegram-tt.git .
+
+# Install deps from lockfile
 RUN npm ci
-RUN git init
-COPY . .
 
-ENV TELEGRAM_API_ID=20045757
-ENV TELEGRAM_API_HASH=7d3ea0c0d4725498789bd51a9ee02421
+# Copy your filled .env (see repo’s .env.example) or pass --env-file at runtime
+# COPY .env .    # uncomment if you want to bake it in
 
-CMD ["npm", "run", "dev"]
+# Webpack dev server needs to bind to 0.0.0.0 to work from Docker
+EXPOSE 1234
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "1234"]
