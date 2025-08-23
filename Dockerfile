@@ -1,5 +1,5 @@
 # Use a Node LTS. Match the repo’s .node-version if you can.
-FROM node:20-bullseye
+FROM node:24
 
 # Git is needed to clone (and the app calls git at runtime for metadata).
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
